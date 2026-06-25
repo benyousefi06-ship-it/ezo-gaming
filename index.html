@@ -1,0 +1,1517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EZO Gaming Lounge – Dubai's Ultimate Gaming Experience</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --void: #050508;
+    --deep: #0a0a18;
+    --surface: #0f0f22;
+    --card: #12122a;
+    --border: #1e1e3f;
+    --cyan: #00f5ff;
+    --purple: #8b00ff;
+    --magenta: #ff0066;
+    --gold: #ffd700;
+    --white: #e8eaf6;
+    --muted: #7b7d9e;
+    --glow-cyan: 0 0 20px rgba(0,245,255,0.4), 0 0 60px rgba(0,245,255,0.15);
+    --glow-purple: 0 0 20px rgba(139,0,255,0.4), 0 0 60px rgba(139,0,255,0.15);
+    --glow-magenta: 0 0 20px rgba(255,0,102,0.4), 0 0 60px rgba(255,0,102,0.15);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--void);
+    color: var(--white);
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--void); }
+  ::-webkit-scrollbar-thumb { background: var(--cyan); border-radius: 2px; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5vw;
+    height: 70px;
+    background: rgba(5,5,8,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(0,245,255,0.12);
+    transition: background 0.3s;
+  }
+  .nav-logo {
+    font-family: 'Orbitron', monospace;
+    font-weight: 900;
+    font-size: 1.5rem;
+    letter-spacing: 0.08em;
+    color: var(--white);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--cyan); }
+  .nav-links {
+    display: flex; gap: 2rem; list-style: none;
+  }
+  .nav-links a {
+    color: var(--muted); text-decoration: none;
+    font-size: 0.85rem; font-weight: 500; letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px;
+    background: var(--cyan); transition: width 0.3s;
+  }
+  .nav-links a:hover { color: var(--cyan); }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-cta {
+    background: var(--cyan); color: var(--void);
+    padding: 0.5rem 1.25rem; border-radius: 3px;
+    font-weight: 700; font-size: 0.8rem; letter-spacing: 0.08em;
+    text-transform: uppercase; text-decoration: none;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .nav-cta:hover { box-shadow: var(--glow-cyan); transform: translateY(-1px); }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+  .hamburger span { display: block; width: 22px; height: 2px; background: var(--white); transition: 0.3s; }
+
+  /* ── HERO ── */
+  #hero {
+    position: relative; min-height: 100vh;
+    display: flex; align-items: center;
+    overflow: hidden;
+    padding: 120px 5vw 80px;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 50%, rgba(139,0,255,0.18) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 80% at 20% 80%, rgba(0,245,255,0.12) 0%, transparent 50%),
+      radial-gradient(ellipse 40% 40% at 80% 10%, rgba(255,0,102,0.10) 0%, transparent 50%),
+      var(--void);
+  }
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(0,245,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,245,255,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    animation: gridShift 20s linear infinite;
+  }
+  @keyframes gridShift { 0% { transform: translateY(0); } 100% { transform: translateY(60px); } }
+  .hero-scanlines {
+    position: absolute; inset: 0; pointer-events: none;
+    background: repeating-linear-gradient(
+      0deg, transparent, transparent 2px,
+      rgba(0,0,0,0.08) 2px, rgba(0,0,0,0.08) 4px
+    );
+  }
+  /* RGB sweep */
+  .rgb-sweep {
+    position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(105deg,
+      transparent 40%,
+      rgba(0,245,255,0.04) 50%,
+      rgba(139,0,255,0.04) 55%,
+      rgba(255,0,102,0.03) 60%,
+      transparent 70%
+    );
+    animation: sweep 6s ease-in-out infinite;
+  }
+  @keyframes sweep {
+    0%, 100% { transform: translateX(-100%); }
+    50% { transform: translateX(100%); }
+  }
+  .hero-content { position: relative; z-index: 2; max-width: 750px; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    border: 1px solid rgba(0,245,255,0.3);
+    padding: 0.35rem 0.9rem; border-radius: 2px;
+    font-size: 0.7rem; font-weight: 600; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--cyan);
+    margin-bottom: 1.5rem;
+    background: rgba(0,245,255,0.06);
+  }
+  .hero-badge::before { content: '▶'; font-size: 0.5rem; }
+  .hero-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: clamp(3rem, 8vw, 6.5rem);
+    font-weight: 700; line-height: 0.95;
+    letter-spacing: -0.01em;
+    margin-bottom: 1.5rem;
+  }
+  .hero-title .line1 { display: block; color: var(--white); }
+  .hero-title .line2 {
+    display: block;
+    background: linear-gradient(90deg, var(--cyan), var(--purple), var(--magenta));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradShift 4s ease-in-out infinite;
+  }
+  @keyframes gradShift {
+    0%, 100% { filter: hue-rotate(0deg); }
+    50% { filter: hue-rotate(30deg); }
+  }
+  .hero-sub {
+    font-size: 1.05rem; color: var(--muted); max-width: 560px;
+    line-height: 1.7; margin-bottom: 2.5rem;
+  }
+  .hero-sub strong { color: var(--white); font-weight: 500; }
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 3rem; }
+  .btn-primary {
+    display: inline-block; padding: 0.85rem 2rem;
+    background: var(--cyan); color: var(--void);
+    font-weight: 700; font-size: 0.85rem; letter-spacing: 0.1em;
+    text-transform: uppercase; text-decoration: none; border-radius: 3px;
+    transition: box-shadow 0.2s, transform 0.2s;
+    border: none; cursor: pointer; font-family: 'Inter', sans-serif;
+  }
+  .btn-primary:hover { box-shadow: var(--glow-cyan); transform: translateY(-2px); }
+  .btn-secondary {
+    display: inline-block; padding: 0.85rem 2rem;
+    background: transparent; color: var(--white);
+    font-weight: 600; font-size: 0.85rem; letter-spacing: 0.1em;
+    text-transform: uppercase; text-decoration: none; border-radius: 3px;
+    border: 1px solid rgba(255,255,255,0.2);
+    transition: border-color 0.2s, color 0.2s;
+    cursor: pointer; font-family: 'Inter', sans-serif;
+  }
+  .btn-secondary:hover { border-color: var(--cyan); color: var(--cyan); }
+  .btn-ghost {
+    display: inline-block; padding: 0.85rem 2rem;
+    background: rgba(139,0,255,0.12); color: var(--purple);
+    font-weight: 600; font-size: 0.85rem; letter-spacing: 0.1em;
+    text-transform: uppercase; text-decoration: none; border-radius: 3px;
+    border: 1px solid rgba(139,0,255,0.3);
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .btn-ghost:hover { box-shadow: var(--glow-purple); transform: translateY(-2px); }
+  .hero-stats {
+    display: flex; gap: 2.5rem; flex-wrap: wrap;
+    padding-top: 2rem; border-top: 1px solid var(--border);
+  }
+  .hero-stat-item { text-align: left; }
+  .hero-stat-num {
+    font-family: 'Orbitron', monospace; font-size: 1.5rem; font-weight: 700;
+    color: var(--cyan); display: block;
+  }
+  .hero-stat-label { font-size: 0.72rem; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
+  .hero-visual {
+    position: absolute; right: 0; top: 0; bottom: 0; width: 45%;
+    display: flex; align-items: center; justify-content: center;
+    pointer-events: none;
+  }
+  .hero-glow-orb {
+    width: 500px; height: 500px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(139,0,255,0.25) 0%, rgba(0,245,255,0.08) 40%, transparent 70%);
+    animation: pulse 4s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.08); opacity: 1; }
+  }
+
+  /* ── SECTIONS SHARED ── */
+  section { padding: 100px 5vw; }
+  .section-label {
+    font-size: 0.7rem; font-weight: 600; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--cyan);
+    margin-bottom: 0.75rem;
+  }
+  .section-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700; line-height: 1.05;
+    margin-bottom: 1.25rem;
+  }
+  .section-desc { color: var(--muted); font-size: 1rem; max-width: 580px; line-height: 1.7; }
+  .text-cyan { color: var(--cyan); }
+  .text-purple { color: var(--purple); }
+
+  /* ── STATS STRIP ── */
+  #stats {
+    background: var(--deep);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 60px 5vw;
+  }
+  .stats-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 2rem; text-align: center;
+  }
+  .stat-item {}
+  .stat-num {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 900;
+    background: linear-gradient(135deg, var(--cyan), var(--purple));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: block; margin-bottom: 0.4rem;
+  }
+  .stat-label { font-size: 0.78rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
+
+  /* ── ABOUT ── */
+  #about { background: var(--void); }
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;
+  }
+  .about-visual {
+    position: relative;
+  }
+  .about-img-frame {
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid rgba(0,245,255,0.2);
+    box-shadow: var(--glow-cyan);
+    aspect-ratio: 4/3;
+    background: linear-gradient(135deg, #0a0a25, #1a0a35);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .about-img-inner {
+    width: 100%; height: 100%;
+    background:
+      linear-gradient(135deg, rgba(0,245,255,0.08), rgba(139,0,255,0.08)),
+      repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(0,245,255,0.03) 20px, rgba(0,245,255,0.03) 21px);
+    display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 1rem;
+  }
+  .about-img-icon { font-size: 4rem; }
+  .about-img-text { font-family: 'Orbitron', monospace; font-size: 0.9rem; color: var(--cyan); letter-spacing: 0.15em; }
+  .about-badge {
+    position: absolute; bottom: -20px; right: -20px;
+    background: var(--card); border: 1px solid var(--border);
+    padding: 1rem 1.5rem; border-radius: 4px;
+    box-shadow: var(--glow-purple);
+  }
+  .about-badge-num { font-family: 'Orbitron', monospace; font-size: 1.8rem; color: var(--purple); font-weight: 700; }
+  .about-badge-text { font-size: 0.72rem; color: var(--muted); }
+  .about-features { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-top: 2rem; }
+  .about-feature {
+    display: flex; align-items: center; gap: 0.6rem;
+    font-size: 0.88rem; color: var(--muted);
+  }
+  .about-feature::before { content: '◈'; color: var(--cyan); font-size: 0.7rem; flex-shrink: 0; }
+
+  /* ── ZONES ── */
+  #zones { background: var(--deep); }
+  .zones-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem; margin-top: 3rem;
+  }
+  .zone-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px; overflow: hidden;
+    transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+    position: relative;
+  }
+  .zone-card:hover { transform: translateY(-4px); }
+  .zone-card.zone-standard:hover { border-color: var(--cyan); box-shadow: var(--glow-cyan); }
+  .zone-card.zone-comfort:hover { border-color: var(--purple); box-shadow: var(--glow-purple); }
+  .zone-card.zone-vip:hover { border-color: var(--gold); box-shadow: 0 0 20px rgba(255,215,0,0.3); }
+  .zone-card.zone-ps5:hover { border-color: var(--magenta); box-shadow: var(--glow-magenta); }
+  .zone-header {
+    padding: 1.75rem 1.75rem 1.25rem;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+  .zone-standard .zone-header { background: linear-gradient(135deg, rgba(0,245,255,0.06), transparent); }
+  .zone-comfort .zone-header { background: linear-gradient(135deg, rgba(139,0,255,0.06), transparent); }
+  .zone-vip .zone-header { background: linear-gradient(135deg, rgba(255,215,0,0.06), transparent); }
+  .zone-ps5 .zone-header { background: linear-gradient(135deg, rgba(255,0,102,0.06), transparent); }
+  .zone-badge {
+    display: inline-block; font-size: 0.62rem; font-weight: 700;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    padding: 0.2rem 0.6rem; border-radius: 2px;
+    margin-bottom: 0.75rem;
+  }
+  .zone-standard .zone-badge { background: rgba(0,245,255,0.15); color: var(--cyan); }
+  .zone-comfort .zone-badge { background: rgba(139,0,255,0.15); color: var(--purple); }
+  .zone-vip .zone-badge { background: rgba(255,215,0,0.15); color: var(--gold); }
+  .zone-ps5 .zone-badge { background: rgba(255,0,102,0.15); color: var(--magenta); }
+  .zone-name {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.6rem; font-weight: 700; margin-bottom: 0.5rem;
+  }
+  .zone-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.5; }
+  .zone-body { padding: 1.5rem 1.75rem; }
+  .zone-specs { list-style: none; margin-bottom: 1.5rem; }
+  .zone-specs li {
+    font-size: 0.82rem; color: var(--muted);
+    padding: 0.35rem 0; border-bottom: 1px solid rgba(255,255,255,0.04);
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .zone-specs li::before { content: '▸'; font-size: 0.6rem; }
+  .zone-standard .zone-specs li::before { color: var(--cyan); }
+  .zone-comfort .zone-specs li::before { color: var(--purple); }
+  .zone-vip .zone-specs li::before { color: var(--gold); }
+  .zone-ps5 .zone-specs li::before { color: var(--magenta); }
+  .zone-pricing { margin-bottom: 1.5rem; }
+  .zone-pricing-title { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.75rem; }
+  .price-rows { display: flex; flex-direction: column; gap: 0.3rem; }
+  .price-row {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.83rem; padding: 0.3rem 0;
+  }
+  .price-row .duration { color: var(--muted); }
+  .price-row .amount { font-weight: 700; font-family: 'Orbitron', monospace; font-size: 0.85rem; }
+  .zone-standard .price-row .amount { color: var(--cyan); }
+  .zone-comfort .price-row .amount { color: var(--purple); }
+  .zone-vip .price-row .amount { color: var(--gold); }
+  .zone-ps5 .price-row .amount { color: var(--magenta); }
+  .zone-btn {
+    display: block; width: 100%; text-align: center;
+    padding: 0.75rem; border-radius: 3px;
+    font-weight: 700; font-size: 0.8rem; letter-spacing: 0.1em;
+    text-transform: uppercase; text-decoration: none;
+    transition: 0.2s; cursor: pointer; border: none; font-family: 'Inter', sans-serif;
+  }
+  .zone-standard .zone-btn { background: var(--cyan); color: var(--void); }
+  .zone-standard .zone-btn:hover { box-shadow: var(--glow-cyan); }
+  .zone-comfort .zone-btn { background: var(--purple); color: var(--white); }
+  .zone-comfort .zone-btn:hover { box-shadow: var(--glow-purple); }
+  .zone-vip .zone-btn { background: var(--gold); color: var(--void); }
+  .zone-vip .zone-btn:hover { box-shadow: 0 0 20px rgba(255,215,0,0.4); }
+  .zone-ps5 .zone-btn { background: var(--magenta); color: var(--white); }
+  .zone-ps5 .zone-btn:hover { box-shadow: var(--glow-magenta); }
+  .vip-tag {
+    position: absolute; top: 0; right: 0;
+    background: var(--gold); color: var(--void);
+    font-size: 0.6rem; font-weight: 800; letter-spacing: 0.15em;
+    padding: 0.25rem 0.75rem;
+    border-bottom-left-radius: 4px;
+  }
+
+  /* ── PROMOTIONS ── */
+  #promotions { background: var(--void); }
+  .promo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 3rem; }
+  .promo-card {
+    border-radius: 6px; padding: 2.5rem;
+    position: relative; overflow: hidden;
+  }
+  .promo-card.promo-new {
+    background: linear-gradient(135deg, rgba(0,245,255,0.08), rgba(0,245,255,0.02));
+    border: 1px solid rgba(0,245,255,0.25);
+  }
+  .promo-card.promo-friend {
+    background: linear-gradient(135deg, rgba(139,0,255,0.08), rgba(139,0,255,0.02));
+    border: 1px solid rgba(139,0,255,0.25);
+  }
+  .promo-icon { font-size: 2.5rem; margin-bottom: 1rem; display: block; }
+  .promo-tag {
+    display: inline-block; font-size: 0.62rem; font-weight: 700;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    padding: 0.2rem 0.6rem; border-radius: 2px; margin-bottom: 1rem;
+  }
+  .promo-new .promo-tag { background: rgba(0,245,255,0.15); color: var(--cyan); }
+  .promo-friend .promo-tag { background: rgba(139,0,255,0.15); color: var(--purple); }
+  .promo-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.8rem; font-weight: 700; margin-bottom: 0.75rem;
+  }
+  .promo-new .promo-title { color: var(--cyan); }
+  .promo-friend .promo-title { color: var(--purple); }
+  .promo-desc { font-size: 0.9rem; color: var(--muted); line-height: 1.6; margin-bottom: 0.75rem; }
+  .promo-note { font-size: 0.75rem; color: rgba(123,125,158,0.6); font-style: italic; }
+  .promo-bg-text {
+    position: absolute; bottom: -10px; right: -5px;
+    font-family: 'Orbitron', monospace; font-size: 5rem; font-weight: 900;
+    opacity: 0.04; color: var(--white); pointer-events: none; line-height: 1;
+  }
+
+  /* ── GAMES ── */
+  #games { background: var(--deep); }
+  .games-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 1rem; margin-top: 3rem;
+  }
+  .game-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 5px; padding: 1.5rem 1rem;
+    text-align: center; transition: 0.3s; cursor: default;
+    position: relative; overflow: hidden;
+  }
+  .game-card:hover { border-color: var(--cyan); transform: translateY(-3px); }
+  .game-card:hover .game-icon { transform: scale(1.1); }
+  .game-icon { font-size: 2.2rem; margin-bottom: 0.6rem; display: block; transition: transform 0.3s; }
+  .game-name { font-size: 0.82rem; font-weight: 600; letter-spacing: 0.05em; }
+  .game-genre { font-size: 0.68rem; color: var(--muted); margin-top: 0.2rem; }
+
+  /* ── WHY ── */
+  #why { background: var(--void); }
+  .why-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.25rem; margin-top: 3rem;
+  }
+  .why-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 5px; padding: 1.75rem;
+    transition: 0.3s;
+  }
+  .why-card:hover { border-color: rgba(0,245,255,0.3); transform: translateY(-3px); }
+  .why-icon { font-size: 1.8rem; margin-bottom: 1rem; display: block; }
+  .why-title { font-family: 'Rajdhani', sans-serif; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.4rem; }
+  .why-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.5; }
+
+  /* ── GALLERY ── */
+  #gallery { background: var(--deep); }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 200px);
+    gap: 1rem; margin-top: 3rem;
+  }
+  .gallery-item {
+    border-radius: 5px; overflow: hidden;
+    border: 1px solid var(--border);
+    position: relative; cursor: pointer;
+    transition: 0.3s;
+  }
+  .gallery-item:hover { border-color: var(--cyan); box-shadow: var(--glow-cyan); }
+  .gallery-item:nth-child(1) { grid-column: span 2; }
+  .gallery-item:nth-child(4) { grid-column: span 2; }
+  .gallery-inner {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 0.75rem;
+  }
+  .gallery-item:nth-child(1) .gallery-inner { background: linear-gradient(135deg, #0a1520, #0a0520); }
+  .gallery-item:nth-child(2) .gallery-inner { background: linear-gradient(135deg, #150a20, #050a20); }
+  .gallery-item:nth-child(3) .gallery-inner { background: linear-gradient(135deg, #0a2015, #050a15); }
+  .gallery-item:nth-child(4) .gallery-inner { background: linear-gradient(135deg, #200a15, #150010); }
+  .gallery-item:nth-child(5) .gallery-inner { background: linear-gradient(135deg, #1a1500, #0a0a00); }
+  .gallery-item:nth-child(6) .gallery-inner { background: linear-gradient(135deg, #001520, #000a20); }
+  .gallery-emoji { font-size: 3rem; }
+  .gallery-label { font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+  .gallery-overlay {
+    position: absolute; inset: 0;
+    background: rgba(0,245,255,0.08);
+    opacity: 0; transition: opacity 0.3s;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .gallery-item:hover .gallery-overlay { opacity: 1; }
+
+  /* ── TESTIMONIALS ── */
+  #testimonials { background: var(--void); }
+  .testi-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem; margin-top: 3rem;
+  }
+  .testi-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 5px; padding: 2rem;
+    position: relative;
+  }
+  .testi-card::before {
+    content: '"';
+    position: absolute; top: 1rem; right: 1.5rem;
+    font-size: 4rem; color: rgba(0,245,255,0.1);
+    font-family: Georgia, serif; line-height: 1;
+  }
+  .stars { color: var(--gold); font-size: 0.85rem; margin-bottom: 1rem; letter-spacing: 0.1em; }
+  .testi-text { font-size: 0.92rem; line-height: 1.7; color: var(--muted); margin-bottom: 1.5rem; font-style: italic; }
+  .testi-author { display: flex; align-items: center; gap: 0.75rem; }
+  .testi-avatar {
+    width: 38px; height: 38px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+    border: 1px solid var(--border);
+  }
+  .testi-card:nth-child(1) .testi-avatar { background: linear-gradient(135deg, rgba(0,245,255,0.2), rgba(0,245,255,0.05)); }
+  .testi-card:nth-child(2) .testi-avatar { background: linear-gradient(135deg, rgba(139,0,255,0.2), rgba(139,0,255,0.05)); }
+  .testi-card:nth-child(3) .testi-avatar { background: linear-gradient(135deg, rgba(255,0,102,0.2), rgba(255,0,102,0.05)); }
+  .testi-name { font-weight: 600; font-size: 0.88rem; }
+  .testi-role { font-size: 0.72rem; color: var(--muted); }
+
+  /* ── BOOKING ── */
+  #booking { background: var(--deep); }
+  .booking-wrapper {
+    max-width: 720px; margin: 3rem auto 0;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 8px; padding: 2.5rem;
+  }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+  .form-group.full { grid-column: span 2; }
+  label { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+  input, select, textarea {
+    background: var(--surface); border: 1px solid var(--border);
+    color: var(--white); border-radius: 3px;
+    padding: 0.75rem 1rem; font-family: 'Inter', sans-serif; font-size: 0.9rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    -webkit-appearance: none;
+  }
+  input:focus, select:focus, textarea:focus {
+    outline: none; border-color: var(--cyan);
+    box-shadow: 0 0 0 2px rgba(0,245,255,0.1);
+  }
+  select option { background: var(--card); }
+  textarea { resize: vertical; min-height: 100px; }
+  .form-submit {
+    margin-top: 1.5rem;
+  }
+  .zone-selects {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 1.25rem;
+  }
+  .zone-select-btn {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 3px; padding: 0.75rem;
+    font-size: 0.82rem; font-weight: 600; cursor: pointer;
+    color: var(--muted); transition: 0.2s; text-align: center;
+    font-family: 'Inter', sans-serif;
+  }
+  .zone-select-btn.active-standard { border-color: var(--cyan); color: var(--cyan); background: rgba(0,245,255,0.06); }
+  .zone-select-btn.active-comfort { border-color: var(--purple); color: var(--purple); background: rgba(139,0,255,0.06); }
+  .zone-select-btn.active-vip { border-color: var(--gold); color: var(--gold); background: rgba(255,215,0,0.06); }
+  .zone-select-btn.active-ps5 { border-color: var(--magenta); color: var(--magenta); background: rgba(255,0,102,0.06); }
+  .booking-confirm {
+    display: none; text-align: center; padding: 2rem;
+  }
+  .booking-confirm.show { display: block; }
+  .confirm-icon { font-size: 3rem; margin-bottom: 1rem; display: block; }
+  .confirm-title { font-family: 'Rajdhani', sans-serif; font-size: 1.8rem; font-weight: 700; color: var(--cyan); margin-bottom: 0.5rem; }
+  .confirm-text { color: var(--muted); font-size: 0.9rem; }
+
+  /* ── CONTACT ── */
+  #contact { background: var(--void); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-top: 3rem; align-items: start; }
+  .contact-info-item { display: flex; gap: 1rem; margin-bottom: 2rem; }
+  .contact-icon {
+    width: 44px; height: 44px; border-radius: 4px; flex-shrink: 0;
+    background: rgba(0,245,255,0.08); border: 1px solid rgba(0,245,255,0.2);
+    display: flex; align-items: center; justify-content: center; font-size: 1.1rem;
+  }
+  .contact-info-title { font-weight: 600; font-size: 0.88rem; margin-bottom: 0.3rem; }
+  .contact-info-text { font-size: 0.85rem; color: var(--muted); line-height: 1.5; }
+  .map-frame {
+    border-radius: 6px; overflow: hidden;
+    border: 1px solid var(--border);
+    height: 380px; margin-top: 1.5rem;
+    background: var(--card);
+  }
+  .map-frame iframe { width: 100%; height: 100%; border: none; filter: grayscale(100%) invert(90%) contrast(90%); }
+  .directions-btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    margin-top: 1rem;
+    padding: 0.6rem 1.25rem;
+    background: rgba(0,245,255,0.08); border: 1px solid rgba(0,245,255,0.25);
+    color: var(--cyan); border-radius: 3px; text-decoration: none;
+    font-size: 0.82rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+    transition: 0.2s;
+  }
+  .directions-btn:hover { box-shadow: var(--glow-cyan); }
+  .contact-form-section .form-group { margin-bottom: 1rem; }
+  .contact-submit-btn {
+    padding: 0.85rem 2rem; background: var(--cyan); color: var(--void);
+    border: none; border-radius: 3px; cursor: pointer;
+    font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.85rem;
+    letter-spacing: 0.1em; text-transform: uppercase; transition: 0.2s;
+    width: 100%;
+  }
+  .contact-submit-btn:hover { box-shadow: var(--glow-cyan); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--deep);
+    border-top: 1px solid var(--border);
+    padding: 4rem 5vw 2rem;
+  }
+  .footer-top {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem; margin-bottom: 3rem;
+  }
+  .footer-brand {}
+  .footer-logo {
+    font-family: 'Orbitron', monospace;
+    font-weight: 900; font-size: 1.4rem; color: var(--white);
+    margin-bottom: 1rem; display: block; text-decoration: none;
+  }
+  .footer-logo span { color: var(--cyan); }
+  .footer-tagline { font-size: 0.85rem; color: var(--muted); line-height: 1.6; max-width: 280px; }
+  .footer-social { display: flex; gap: 0.75rem; margin-top: 1.5rem; }
+  .social-icon {
+    width: 36px; height: 36px; border-radius: 3px;
+    background: var(--card); border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.9rem; text-decoration: none; color: var(--muted);
+    transition: 0.2s;
+  }
+  .social-icon:hover { border-color: var(--cyan); color: var(--cyan); }
+  .footer-col-title { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--white); margin-bottom: 1.25rem; }
+  .footer-links { list-style: none; }
+  .footer-links li { margin-bottom: 0.6rem; }
+  .footer-links a { color: var(--muted); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--cyan); }
+  .footer-bottom {
+    border-top: 1px solid var(--border); padding-top: 1.5rem;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.78rem; color: var(--muted);
+  }
+  .footer-divider {
+    width: 60px; height: 2px;
+    background: linear-gradient(90deg, var(--cyan), var(--purple));
+    margin-bottom: 2rem; border-radius: 1px;
+  }
+
+  /* ── MOBILE NAV ── */
+  .mobile-menu {
+    display: none; position: fixed; inset: 0; top: 70px;
+    background: rgba(5,5,8,0.97); backdrop-filter: blur(20px);
+    z-index: 999; flex-direction: column; align-items: center;
+    justify-content: center; gap: 2rem;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    color: var(--white); text-decoration: none; font-size: 1.2rem;
+    font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .mobile-menu a:hover { color: var(--cyan); }
+
+  /* ── SECTION DIVIDER ── */
+  .section-divider {
+    height: 1px; background: linear-gradient(90deg, transparent, var(--border), transparent);
+    margin: 0 5vw;
+  }
+
+  /* ── ANIMATIONS ── */
+  .fade-in {
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── NOTIFICATION ── */
+  .notification {
+    position: fixed; bottom: 2rem; right: 2rem;
+    background: var(--card); border: 1px solid var(--cyan);
+    padding: 1rem 1.5rem; border-radius: 5px;
+    box-shadow: var(--glow-cyan); z-index: 9999;
+    font-size: 0.88rem; transform: translateY(100px); opacity: 0;
+    transition: 0.4s;
+  }
+  .notification.show { transform: translateY(0); opacity: 1; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .nav-links, .nav-cta { display: none; }
+    .hamburger { display: flex; }
+    .hero-visual { display: none; }
+    .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .promo-grid { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .gallery-grid { grid-template-columns: 1fr 1fr; }
+    .gallery-item:nth-child(1), .gallery-item:nth-child(4) { grid-column: span 1; }
+  }
+  @media (max-width: 600px) {
+    section { padding: 70px 5vw; }
+    .form-grid { grid-template-columns: 1fr; }
+    .form-group.full { grid-column: span 1; }
+    .zone-selects { grid-template-columns: 1fr 1fr; }
+    .footer-top { grid-template-columns: 1fr; }
+    .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+    .gallery-grid { grid-template-columns: 1fr; grid-template-rows: auto; }
+    .hero-stats { gap: 1.5rem; }
+    .zones-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">EZ<span>O</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#zones">Zones</a></li>
+    <li><a href="#promotions">Offers</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#booking" class="nav-cta">Book Now</a>
+  <div class="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" onclick="toggleMenu()">About</a>
+  <a href="#zones" onclick="toggleMenu()">Zones</a>
+  <a href="#promotions" onclick="toggleMenu()">Offers</a>
+  <a href="#gallery" onclick="toggleMenu()">Gallery</a>
+  <a href="#testimonials" onclick="toggleMenu()">Reviews</a>
+  <a href="#booking" onclick="toggleMenu()">Book Now</a>
+  <a href="#contact" onclick="toggleMenu()">Contact</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-scanlines"></div>
+  <div class="rgb-sweep"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Business Bay, Dubai · Open 24/7</div>
+    <h1 class="hero-title">
+      <span class="line1">Dubai's Ultimate</span>
+      <span class="line2">Gaming Experience</span>
+    </h1>
+    <p class="hero-sub">
+      EZO Gaming Lounge delivers <strong>premium gaming hardware</strong>, high-performance stations,
+      competitive esports setups, PlayStation gaming, and a vibrant gaming community in the
+      heart of <strong>Business Bay</strong>.
+    </p>
+    <div class="hero-actions">
+      <a href="#booking" class="btn-primary">Book Your Session</a>
+      <a href="#zones" class="btn-secondary">Explore Zones</a>
+      <a href="#zones" class="btn-ghost">View Pricing</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat-item">
+        <span class="hero-stat-num">24/7</span>
+        <span class="hero-stat-label">Always Open</span>
+      </div>
+      <div class="hero-stat-item">
+        <span class="hero-stat-num">30+</span>
+        <span class="hero-stat-label">Gaming Stations</span>
+      </div>
+      <div class="hero-stat-item">
+        <span class="hero-stat-num">4.6★</span>
+        <span class="hero-stat-label">Customer Rating</span>
+      </div>
+      <div class="hero-stat-item">
+        <span class="hero-stat-num">1000+</span>
+        <span class="hero-stat-label">Community Members</span>
+      </div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-glow-orb"></div>
+  </div>
+</section>
+
+<!-- STATS STRIP -->
+<div id="stats">
+  <div class="stats-grid">
+    <div class="stat-item fade-in">
+      <span class="stat-num">24/7</span>
+      <span class="stat-label">Open Year-Round</span>
+    </div>
+    <div class="stat-item fade-in">
+      <span class="stat-num">4.6★</span>
+      <span class="stat-label">Customer Rating</span>
+    </div>
+    <div class="stat-item fade-in">
+      <span class="stat-num">30+</span>
+      <span class="stat-label">Premium Stations</span>
+    </div>
+    <div class="stat-item fade-in">
+      <span class="stat-num">1K+</span>
+      <span class="stat-label">Community Members</span>
+    </div>
+    <div class="stat-item fade-in">
+      <span class="stat-num">100+</span>
+      <span class="stat-label">Events Hosted</span>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-visual fade-in">
+      <div class="about-img-frame">
+        <div class="about-img-inner">
+          <span class="about-img-icon">🎮</span>
+          <span class="about-img-text">EZO GAMING LOUNGE</span>
+        </div>
+      </div>
+      <div class="about-badge">
+        <div class="about-badge-num">RTX 5080</div>
+        <div class="about-badge-text">Top-tier GPU performance</div>
+      </div>
+    </div>
+    <div class="fade-in">
+      <div class="section-label">About Us</div>
+      <h2 class="section-title">Where Gamers <span class="text-cyan">Level Up</span></h2>
+      <p class="section-desc" style="margin-bottom: 1.25rem;">
+        EZO Gaming Lounge is a premium gaming destination designed for gamers of all skill levels.
+        Located in the heart of Business Bay, we combine cutting-edge hardware, ultra-fast performance,
+        premium comfort, and a community-driven environment.
+      </p>
+      <p class="section-desc" style="margin-bottom: 2rem;">
+        Whether you want to compete, practice, relax with friends, or experience the latest games —
+        EZO delivers a world-class gaming experience that rivals the best lounges globally.
+      </p>
+      <div class="footer-divider"></div>
+      <div class="about-features">
+        <div class="about-feature">RTX 5070 & 5080 Graphics</div>
+        <div class="about-feature">Alienware 360–500Hz Monitors</div>
+        <div class="about-feature">AMD Ryzen 7 9800X3D CPUs</div>
+        <div class="about-feature">Logitech Pro Peripherals</div>
+        <div class="about-feature">Premium Comfort Seating</div>
+        <div class="about-feature">Open 24 Hours, 7 Days</div>
+        <div class="about-feature">PS5 Zone with 85" Display</div>
+        <div class="about-feature">Business Bay Location</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ZONES -->
+<section id="zones">
+  <div class="section-label">Gaming Zones</div>
+  <h2 class="section-title">Choose Your <span class="text-cyan">Arena</span></h2>
+  <p class="section-desc">Four distinct zones crafted for every type of player — from casual sessions to elite esports performance.</p>
+  <div class="zones-grid">
+
+    <!-- Standard -->
+    <div class="zone-card zone-standard fade-in">
+      <div class="zone-header">
+        <div class="zone-badge">Standard Zone</div>
+        <div class="zone-name">Performance Station</div>
+        <div class="zone-desc">Competitive and casual gaming with premium RTX 5070 performance.</div>
+      </div>
+      <div class="zone-body">
+        <ul class="zone-specs">
+          <li>Intel Core i7-14700KF Processor</li>
+          <li>Alienware 360Hz Gaming Monitor</li>
+          <li>NVIDIA GeForce RTX 5070 12GB</li>
+          <li>Logitech Gaming Peripherals</li>
+          <li>32GB RAM</li>
+        </ul>
+        <div class="zone-pricing">
+          <div class="zone-pricing-title">Pricing</div>
+          <div class="price-rows">
+            <div class="price-row"><span class="duration">1 Hour</span><span class="amount">AED 25</span></div>
+            <div class="price-row"><span class="duration">3 Hours</span><span class="amount">AED 55</span></div>
+            <div class="price-row"><span class="duration">5 Hours</span><span class="amount">AED 85</span></div>
+            <div class="price-row"><span class="duration">Day Pass (7h)</span><span class="amount">AED 115</span></div>
+            <div class="price-row"><span class="duration">Night Pass (10h)</span><span class="amount">AED 125</span></div>
+          </div>
+        </div>
+        <a href="#booking" class="zone-btn">Book Standard</a>
+      </div>
+    </div>
+
+    <!-- Comfort -->
+    <div class="zone-card zone-comfort fade-in">
+      <div class="zone-header">
+        <div class="zone-badge">Comfort Zone</div>
+        <div class="zone-name">Comfort Station</div>
+        <div class="zone-desc">Premium seating meets high-performance hardware for extended gaming sessions.</div>
+      </div>
+      <div class="zone-body">
+        <ul class="zone-specs">
+          <li>Intel Core i7-14700KF Processor</li>
+          <li>Alienware 360Hz Gaming Monitor</li>
+          <li>NVIDIA GeForce RTX 5070 12GB</li>
+          <li>Logitech Gaming Peripherals</li>
+          <li>32GB RAM</li>
+        </ul>
+        <div class="zone-pricing">
+          <div class="zone-pricing-title">Pricing</div>
+          <div class="price-rows">
+            <div class="price-row"><span class="duration">1 Hour</span><span class="amount">AED 50</span></div>
+            <div class="price-row"><span class="duration">3 Hours</span><span class="amount">AED 65</span></div>
+            <div class="price-row"><span class="duration">5 Hours</span><span class="amount">AED 100</span></div>
+            <div class="price-row"><span class="duration">Day Pass (7h)</span><span class="amount">AED 135</span></div>
+            <div class="price-row"><span class="duration">Night Pass (10h)</span><span class="amount">AED 150</span></div>
+          </div>
+        </div>
+        <a href="#booking" class="zone-btn">Book Comfort</a>
+      </div>
+    </div>
+
+    <!-- VIP -->
+    <div class="zone-card zone-vip fade-in">
+      <div class="vip-tag">★ VIP</div>
+      <div class="zone-header">
+        <div class="zone-badge">VIP Zone</div>
+        <div class="zone-name">Elite Station</div>
+        <div class="zone-desc">The pinnacle of gaming hardware — reserved for serious players and esports athletes.</div>
+      </div>
+      <div class="zone-body">
+        <ul class="zone-specs">
+          <li>AMD Ryzen 7 9800X3D Processor</li>
+          <li>Alienware 500Hz Gaming Monitor</li>
+          <li>NVIDIA GeForce RTX 5080 16GB</li>
+          <li>Logitech Gaming Peripherals</li>
+          <li>32GB RAM</li>
+        </ul>
+        <div class="zone-pricing">
+          <div class="zone-pricing-title">Pricing</div>
+          <div class="price-rows">
+            <div class="price-row"><span class="duration">1 Hour</span><span class="amount">AED 35</span></div>
+            <div class="price-row"><span class="duration">3 Hours</span><span class="amount">AED 90</span></div>
+            <div class="price-row"><span class="duration">5 Hours</span><span class="amount">AED 125</span></div>
+            <div class="price-row"><span class="duration">Day Pass (7h)</span><span class="amount">AED 150</span></div>
+            <div class="price-row"><span class="duration">Night Pass (10h)</span><span class="amount">AED 175</span></div>
+          </div>
+        </div>
+        <a href="#booking" class="zone-btn">Book VIP</a>
+      </div>
+    </div>
+
+    <!-- PS5 -->
+    <div class="zone-card zone-ps5 fade-in">
+      <div class="zone-header">
+        <div class="zone-badge">PlayStation 5</div>
+        <div class="zone-name">Console Zone</div>
+        <div class="zone-desc">Console gaming elevated — PS5 on a massive 85" 4K display with lounge seating.</div>
+      </div>
+      <div class="zone-body">
+        <ul class="zone-specs">
+          <li>PlayStation 5 Console</li>
+          <li>85-Inch 4K Display</li>
+          <li>Adjustable Gaming Seats</li>
+          <li>Multiplayer Experience</li>
+          <li>Comfortable Lounge Environment</li>
+        </ul>
+        <div class="zone-pricing">
+          <div class="zone-pricing-title">Pricing</div>
+          <div class="price-rows">
+            <div class="price-row"><span class="duration">Per Hour</span><span class="amount">AED 50</span></div>
+          </div>
+        </div>
+        <a href="#booking" class="zone-btn">Book PS5</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROMOTIONS -->
+<section id="promotions">
+  <div class="section-label">Special Offers</div>
+  <h2 class="section-title">Exclusive <span class="text-cyan">Promotions</span></h2>
+  <p class="section-desc">Unlock exclusive deals designed to get you gaming at EZO for less.</p>
+  <div class="promo-grid">
+    <div class="promo-card promo-new fade-in">
+      <span class="promo-icon">🎁</span>
+      <div class="promo-tag">New Player Offer</div>
+      <div class="promo-title">First 2 Hours — FREE</div>
+      <p class="promo-desc">
+        First time at EZO? We're welcoming you with 2 completely free hours of gaming. Experience
+        our premium hardware and vibrant atmosphere on us — no strings attached.
+      </p>
+      <p class="promo-note">Valid for first-time visitors only. One per person.</p>
+      <div class="promo-bg-text">FREE</div>
+    </div>
+    <div class="promo-card promo-friend fade-in">
+      <span class="promo-icon">👥</span>
+      <div class="promo-tag">Bring a Friend</div>
+      <div class="promo-title">Bring a Friend, Get 1 Hour Free</div>
+      <p class="promo-desc">
+        Gaming is better with friends. Bring a friend to EZO and earn 1 free hour of gaming
+        on your next visit. The more friends, the more you play.
+      </p>
+      <p class="promo-note">Cannot be combined with other offers. Terms apply.</p>
+      <div class="promo-bg-text">+1H</div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- GAMES -->
+<section id="games">
+  <div class="section-label">Featured Games</div>
+  <h2 class="section-title">Play What's <span class="text-cyan">Trending</span></h2>
+  <p class="section-desc">EZO stations are loaded with today's biggest titles — jump straight in.</p>
+  <div class="games-grid">
+    <div class="game-card fade-in">
+      <span class="game-icon">🎯</span>
+      <div class="game-name">Valorant</div>
+      <div class="game-genre">Tactical FPS</div>
+    </div>
+    <div class="game-card fade-in">
+      <span class="game-icon">💣</span>
+      <div class="game-name">Counter-Strike 2</div>
+      <div class="game-genre">Tactical FPS</div>
+    </div>
+    <div class="game-card fade-in">
+      <span class="game-icon">🌩️</span>
+      <div class="game-name">Fortnite</div>
+      <div class="game-genre">Battle Royale</div>
+    </div>
+    <div class="game-card fade-in">
+      <span class="game-icon">⚽</span>
+      <div class="game-name">EA FC</div>
+      <div class="game-genre">Sports</div>
+    </div>
+    <div class="game-card fade-in">
+      <span class="game-icon">🔫</span>
+      <div class="game-name">Call of Duty</div>
+      <div class="game-genre">FPS / Warzone</div>
+    </div>
+    <div class="game-card fade-in">
+      <span class="game-icon">🚀</span>
+      <div class="game-name">Rocket League</div>
+      <div class="game-genre">Sports / Action</div>
+    </div>
+    <div class="game-card fade-in">
+      <span class="game-icon">🦅</span>
+      <div class="game-name">Apex Legends</div>
+      <div class="game-genre">Battle Royale</div>
+    </div>
+    <div class="game-card fade-in">
+      <span class="game-icon">🪖</span>
+      <div class="game-name">PUBG</div>
+      <div class="game-genre">Battle Royale</div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY CHOOSE -->
+<section id="why">
+  <div class="section-label">Why EZO</div>
+  <h2 class="section-title">Built for <span class="text-cyan">Serious Gamers</span></h2>
+  <p class="section-desc">Every detail at EZO is engineered to maximize your gaming performance and comfort.</p>
+  <div class="why-grid">
+    <div class="why-card fade-in">
+      <span class="why-icon">⚡</span>
+      <div class="why-title">RTX 5070 & 5080 GPUs</div>
+      <div class="why-desc">Latest-generation NVIDIA graphics for buttery-smooth gameplay at maximum settings.</div>
+    </div>
+    <div class="why-card fade-in">
+      <span class="why-icon">🖥️</span>
+      <div class="why-title">500Hz Alienware Monitors</div>
+      <div class="why-desc">Ultra-high refresh Alienware displays that give you a genuine competitive edge.</div>
+    </div>
+    <div class="why-card fade-in">
+      <span class="why-icon">🎮</span>
+      <div class="why-title">Logitech Pro Equipment</div>
+      <div class="why-desc">Professional-grade mice, keyboards and headsets used by esports pros worldwide.</div>
+    </div>
+    <div class="why-card fade-in">
+      <span class="why-icon">🛋️</span>
+      <div class="why-title">Premium Comfort</div>
+      <div class="why-desc">Ergonomic gaming chairs and spacious setups designed for long, comfortable sessions.</div>
+    </div>
+    <div class="why-card fade-in">
+      <span class="why-icon">🕐</span>
+      <div class="why-title">Open 24/7</div>
+      <div class="why-desc">Game whenever inspiration strikes — morning, midnight, or anywhere in between.</div>
+    </div>
+    <div class="why-card fade-in">
+      <span class="why-icon">📍</span>
+      <div class="why-title">Business Bay Location</div>
+      <div class="why-desc">Prime spot in Ontario Business Tower — easily accessible from across Dubai.</div>
+    </div>
+    <div class="why-card fade-in">
+      <span class="why-icon">🏆</span>
+      <div class="why-title">Competitive Atmosphere</div>
+      <div class="why-desc">Regular events, tournaments, and a like-minded community that pushes you to improve.</div>
+    </div>
+    <div class="why-card fade-in">
+      <span class="why-icon">👋</span>
+      <div class="why-title">Friendly Staff</div>
+      <div class="why-desc">Knowledgeable, passionate team on hand 24/7 to ensure your session runs perfectly.</div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="section-label">Gallery</div>
+  <h2 class="section-title">Inside <span class="text-cyan">EZO</span></h2>
+  <p class="section-desc">A glimpse into Dubai's most immersive gaming environment.</p>
+  <div class="gallery-grid">
+    <div class="gallery-item fade-in">
+      <div class="gallery-inner">
+        <span class="gallery-emoji">💻</span>
+        <span class="gallery-label">Gaming PC Stations</span>
+      </div>
+      <div class="gallery-overlay">🔍</div>
+    </div>
+    <div class="gallery-item fade-in">
+      <div class="gallery-inner">
+        <span class="gallery-emoji">🌈</span>
+        <span class="gallery-label">RGB Setup</span>
+      </div>
+      <div class="gallery-overlay">🔍</div>
+    </div>
+    <div class="gallery-item fade-in">
+      <div class="gallery-inner">
+        <span class="gallery-emoji">👑</span>
+        <span class="gallery-label">VIP Zone</span>
+      </div>
+      <div class="gallery-overlay">🔍</div>
+    </div>
+    <div class="gallery-item fade-in">
+      <div class="gallery-inner">
+        <span class="gallery-emoji">🎮</span>
+        <span class="gallery-label">PlayStation Area</span>
+      </div>
+      <div class="gallery-overlay">🔍</div>
+    </div>
+    <div class="gallery-item fade-in">
+      <div class="gallery-inner">
+        <span class="gallery-emoji">🏆</span>
+        <span class="gallery-label">Gaming Events</span>
+      </div>
+      <div class="gallery-overlay">🔍</div>
+    </div>
+    <div class="gallery-item fade-in">
+      <div class="gallery-inner">
+        <span class="gallery-emoji">🎯</span>
+        <span class="gallery-label">Competitive Sessions</span>
+      </div>
+      <div class="gallery-overlay">🔍</div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="section-label">Reviews</div>
+  <h2 class="section-title">What Gamers <span class="text-cyan">Say</span></h2>
+  <p class="section-desc">Real feedback from Dubai's gaming community.</p>
+  <div class="testi-grid">
+    <div class="testi-card fade-in">
+      <div class="stars">★★★★★</div>
+      <p class="testi-text">"The best gaming lounge I've visited in Dubai. Amazing setup and atmosphere — the VIP zone is absolutely next level."</p>
+      <div class="testi-author">
+        <div class="testi-avatar">🎮</div>
+        <div>
+          <div class="testi-name">Ahmed K.</div>
+          <div class="testi-role">Competitive Gamer, Dubai</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card fade-in">
+      <div class="stars">★★★★★</div>
+      <p class="testi-text">"Fantastic gaming hardware and excellent service. The RTX 5080 stations run everything at max settings flawlessly."</p>
+      <div class="testi-author">
+        <div class="testi-avatar">⚡</div>
+        <div>
+          <div class="testi-name">Sarah M.</div>
+          <div class="testi-role">Content Creator</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card fade-in">
+      <div class="stars">★★★★☆</div>
+      <p class="testi-text">"My favorite gaming destination in Business Bay. The 24/7 access is a game-changer for late-night sessions with friends."</p>
+      <div class="testi-author">
+        <div class="testi-avatar">🏆</div>
+        <div>
+          <div class="testi-name">Omar R.</div>
+          <div class="testi-role">Esports Enthusiast</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- BOOKING -->
+<section id="booking">
+  <div class="section-label">Reservations</div>
+  <h2 class="section-title" style="text-align:center;">Book Your <span class="text-cyan">Session</span></h2>
+  <p class="section-desc" style="text-align:center; margin: 0 auto 0;">Reserve your station online — payment handled at the lounge on arrival.</p>
+  <div class="booking-wrapper">
+    <div id="bookingForm">
+      <div style="margin-bottom: 1.5rem;">
+        <label style="margin-bottom: 0.75rem; display: block;">Select Zone</label>
+        <div class="zone-selects">
+          <button class="zone-select-btn" onclick="selectZone('Standard Zone', this, 'active-standard')">🖥️ Standard</button>
+          <button class="zone-select-btn" onclick="selectZone('Comfort Zone', this, 'active-comfort')">🛋️ Comfort</button>
+          <button class="zone-select-btn" onclick="selectZone('VIP Zone', this, 'active-vip')">👑 VIP</button>
+          <button class="zone-select-btn" onclick="selectZone('PS5 Zone', this, 'active-ps5')">🎮 PlayStation 5</button>
+        </div>
+        <input type="hidden" id="selectedZone" value="">
+      </div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="fname">First Name</label>
+          <input type="text" id="fname" placeholder="Your first name">
+        </div>
+        <div class="form-group">
+          <label for="lname">Last Name</label>
+          <input type="text" id="lname" placeholder="Your last name">
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" placeholder="your@email.com">
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" placeholder="+971 50 000 0000">
+        </div>
+        <div class="form-group">
+          <label for="date">Preferred Date</label>
+          <input type="date" id="date">
+        </div>
+        <div class="form-group">
+          <label for="time">Preferred Time</label>
+          <input type="time" id="time">
+        </div>
+        <div class="form-group">
+          <label for="duration">Session Duration</label>
+          <select id="duration">
+            <option value="">Select duration</option>
+            <option>1 Hour</option>
+            <option>3 Hours</option>
+            <option>5 Hours</option>
+            <option>7 Hours (Day Pass)</option>
+            <option>10 Hours (Night Pass)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="players">Number of Players</label>
+          <select id="players">
+            <option value="">Select</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4+</option>
+          </select>
+        </div>
+        <div class="form-group full">
+          <label for="notes">Additional Notes (Optional)</label>
+          <textarea id="notes" placeholder="Any special requirements, game preferences, or questions..."></textarea>
+        </div>
+      </div>
+      <div class="form-submit">
+        <button class="btn-primary" style="width:100%; padding: 1rem; font-size: 0.9rem;" onclick="submitBooking()">
+          Submit Booking Request →
+        </button>
+      </div>
+      <p style="font-size: 0.75rem; color: var(--muted); margin-top: 1rem; text-align: center;">
+        Payment is handled at the lounge on arrival. Our team will confirm your booking via email or phone.
+      </p>
+    </div>
+    <div class="booking-confirm" id="bookingConfirm">
+      <span class="confirm-icon">✅</span>
+      <div class="confirm-title">Booking Request Sent!</div>
+      <p class="confirm-text">Thank you! We'll confirm your session at EZO Gaming Lounge shortly via email or phone. See you soon, gamer.</p>
+      <button class="btn-secondary" style="margin-top: 1.5rem; border-radius: 3px; cursor: pointer; font-family: inherit;" onclick="resetBooking()">Make Another Booking</button>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label">Find Us</div>
+  <h2 class="section-title">Visit <span class="text-cyan">EZO Gaming</span></h2>
+  <p class="section-desc">We're right in the heart of Business Bay — easy to reach from anywhere in Dubai.</p>
+  <div class="contact-grid">
+    <div>
+      <div class="contact-info-item fade-in">
+        <div class="contact-icon">📍</div>
+        <div>
+          <div class="contact-info-title">Location</div>
+          <div class="contact-info-text">Ontario Business Tower, Ground Floor<br>Business Bay, Dubai<br>United Arab Emirates</div>
+        </div>
+      </div>
+      <div class="contact-info-item fade-in">
+        <div class="contact-icon">📞</div>
+        <div>
+          <div class="contact-info-title">Phone</div>
+          <div class="contact-info-text"><a href="tel:+97143953996" style="color: var(--cyan); text-decoration: none;">+971 4 395 3996</a></div>
+        </div>
+      </div>
+      <div class="contact-info-item fade-in">
+        <div class="contact-icon">🕐</div>
+        <div>
+          <div class="contact-info-title">Hours</div>
+          <div class="contact-info-text">Open 24 Hours · 7 Days a Week<br><span style="color: var(--cyan); font-size: 0.8rem;">Always Ready to Game</span></div>
+        </div>
+      </div>
+      <a href="https://maps.google.com/?q=Ontario+Business+Tower+Business+Bay+Dubai" target="_blank" class="directions-btn">
+        📍 Get Directions on Google Maps
+      </a>
+      <div class="map-frame">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3610.3295959064505!2d55.264!3d25.186!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjXCsDExJzA5LjYiTiA1NcKwMTUnNTQuNCJF!5e0!3m2!1sen!2sae!4v1620000000000!5m2!1sen!2sae"
+          allowfullscreen="" loading="lazy">
+        </iframe>
+      </div>
+    </div>
+    <div class="contact-form-section fade-in">
+      <div style="font-family:'Rajdhani',sans-serif; font-size:1.3rem; font-weight:700; margin-bottom:1.5rem; color: var(--white);">Send Us a Message</div>
+      <div class="form-group">
+        <label>Your Name</label>
+        <input type="text" id="cname" placeholder="Full name">
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="cemail" placeholder="your@email.com">
+      </div>
+      <div class="form-group">
+        <label>Subject</label>
+        <input type="text" id="csubject" placeholder="Booking enquiry, event info...">
+      </div>
+      <div class="form-group">
+        <label>Message</label>
+        <textarea id="cmessage" style="min-height: 130px;" placeholder="How can we help?"></textarea>
+      </div>
+      <button class="contact-submit-btn" onclick="sendMessage()">Send Message →</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="#" class="footer-logo">EZ<span>O</span> Gaming</a>
+      <p class="footer-tagline">
+        Dubai's premier gaming lounge — delivering world-class esports experiences in the heart of Business Bay, 24 hours a day, 7 days a week.
+      </p>
+      <div class="footer-social">
+        <a href="#" class="social-icon" title="Instagram">📷</a>
+        <a href="#" class="social-icon" title="TikTok">🎵</a>
+        <a href="#" class="social-icon" title="Twitter/X">🐦</a>
+        <a href="#" class="social-icon" title="Discord">💬</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Quick Links</div>
+      <ul class="footer-links">
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#zones">Gaming Zones</a></li>
+        <li><a href="#promotions">Offers</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#testimonials">Reviews</a></li>
+        <li><a href="#booking">Book Now</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Zones</div>
+      <ul class="footer-links">
+        <li><a href="#zones">Standard Zone</a></li>
+        <li><a href="#zones">Comfort Zone</a></li>
+        <li><a href="#zones">VIP Zone</a></li>
+        <li><a href="#zones">PlayStation 5</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Contact</div>
+      <ul class="footer-links">
+        <li><a href="tel:+97143953996">+971 4 395 3996</a></li>
+        <li><a href="https://maps.google.com/?q=Ontario+Business+Tower+Business+Bay+Dubai" target="_blank">Ontario Business Tower</a></li>
+        <li><a href="#">Ground Floor, Business Bay</a></li>
+        <li><a href="#">Dubai, UAE</a></li>
+        <li style="margin-top:0.75rem;"><span style="color:var(--cyan); font-size:0.78rem;">⏰ Open 24/7</span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 EZO Gaming Lounge. All rights reserved.</span>
+    <span>Ontario Business Tower · Business Bay · Dubai, UAE</span>
+  </div>
+</footer>
+
+<!-- NOTIFICATION -->
+<div class="notification" id="notification"></div>
+
+<script>
+  // Mobile menu
+  function toggleMenu() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+
+  // Fade in on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Zone selection
+  let selectedZoneClass = '';
+  function selectZone(zone, btn, cls) {
+    document.getElementById('selectedZone').value = zone;
+    document.querySelectorAll('.zone-select-btn').forEach(b => {
+      b.className = 'zone-select-btn';
+    });
+    btn.classList.add(cls);
+    selectedZoneClass = cls;
+  }
+
+  // Booking form
+  function submitBooking() {
+    const zone = document.getElementById('selectedZone').value;
+    const fname = document.getElementById('fname').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const date = document.getElementById('date').value;
+    const duration = document.getElementById('duration').value;
+
+    if (!zone) { showNotif('Please select a gaming zone.'); return; }
+    if (!fname) { showNotif('Please enter your first name.'); return; }
+    if (!email) { showNotif('Please enter your email address.'); return; }
+    if (!date) { showNotif('Please select a preferred date.'); return; }
+    if (!duration) { showNotif('Please select a session duration.'); return; }
+
+    document.getElementById('bookingForm').style.display = 'none';
+    document.getElementById('bookingConfirm').classList.add('show');
+  }
+
+  function resetBooking() {
+    document.getElementById('bookingForm').style.display = 'block';
+    document.getElementById('bookingConfirm').classList.remove('show');
+    document.querySelectorAll('.zone-select-btn').forEach(b => b.className = 'zone-select-btn');
+    document.getElementById('selectedZone').value = '';
+    ['fname','lname','email','phone','date','time','notes'].forEach(id => {
+      document.getElementById(id).value = '';
+    });
+    document.getElementById('duration').value = '';
+    document.getElementById('players').value = '';
+  }
+
+  // Contact form
+  function sendMessage() {
+    const name = document.getElementById('cname').value.trim();
+    const email = document.getElementById('cemail').value.trim();
+    const msg = document.getElementById('cmessage').value.trim();
+    if (!name || !email || !msg) { showNotif('Please fill in all required fields.'); return; }
+    showNotif('✅ Message sent! We\'ll get back to you soon.');
+    ['cname','cemail','csubject','cmessage'].forEach(id => document.getElementById(id).value = '');
+  }
+
+  // Notification
+  function showNotif(text) {
+    const n = document.getElementById('notification');
+    n.textContent = text;
+    n.classList.add('show');
+    setTimeout(() => n.classList.remove('show'), 3500);
+  }
+
+  // Navbar scroll effect
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    nav.style.background = window.scrollY > 50
+      ? 'rgba(5,5,8,0.97)'
+      : 'rgba(5,5,8,0.85)';
+  });
+
+  // Set min date for booking
+  const dateInput = document.getElementById('date');
+  if (dateInput) {
+    const today = new Date().toISOString().split('T')[0];
+    dateInput.min = today;
+    dateInput.value = today;
+  }
+</script>
+</body>
+</html>
